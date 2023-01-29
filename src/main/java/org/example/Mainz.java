@@ -9,7 +9,7 @@ import static java.lang.System.out;
 public class Mainz {
     public static void main(String[] args) {
 
-        lesson12();
+        lesson7();
     }
 
     public static void lesson1() {
@@ -97,36 +97,24 @@ public class Mainz {
         int[] arr2 = new int[5];
         int sumArr1 = 0;
         int sumArr2 = 0;
-        int avgArr1;
-        int avgArr2;
+        double avgArr1;
+        double avgArr2;
+        String s = "";
+        String s1 = "";
 
         for (int i = 0; i < arr1.length; i++) {
             arr1[i] = (int) (Math.random() * 5);
+            arr2[i] = (int) (Math.random() * 5);
+            s += arr1[i] + " ";
+            s1 += arr2[i] + " ";
+            sumArr1 += arr1[i];
+            sumArr2 += arr2[i];
         }
-        String s = " "; //не вспомнил как проще вывести массив в строку
-        for (int a : arr1) {
-            s += a + " ";
-        }
+
         out.println(s);
-        for (int x : arr1) {
-            sumArr1 += x;
-        }
+        out.println(s1);
+
         avgArr1 = sumArr1 / arr1.length;
-
-
-        out.println(" ");
-        for (int j = 0; j < arr2.length; j++) {
-            arr2[j] = (int) (Math.random() * 5);
-        }
-        String g = " ";
-        for (int w : arr2) {
-            g += w + " ";
-        }
-        out.println(g);
-
-        for (int n : arr2) {
-            sumArr2 += n;
-        }
         avgArr2 = sumArr2 / arr2.length;
 
         if (avgArr1 > avgArr2) {
@@ -135,7 +123,7 @@ public class Mainz {
         if (avgArr1 < avgArr2) {
             out.println(avgArr2);
         } else {
-            out.println("Средние арифметические  массивов" + s + " и " + g + "  равны"); // как передать имя массива ?
+            out.println("Средние арифметические массивов равны");
         }
 
     }
@@ -144,28 +132,27 @@ public class Mainz {
         int[] arr = new int[4];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) ((Math.random() * 99) + 10);
+            out.print(arr[i] + " ");
         }
-        String arrToString = " ";
-        for (int w : arr) {
-            arrToString += w + " ";
-        }
-        out.println(arrToString);
+        out.println(" ");
 //проверить возврастающая последовательность или нет
-        if (arr[0] < arr[1] & arr[1] < arr[2] & arr[2] < arr[3]) {
-            out.println("Последовательность возврастающая");
-        } else {
-            out.println("Последовательность не возврастающая");
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (!(arr[i] < arr[i + 1])) {
+                out.println("Последовательность не возврастающая");
+                return;
+            }
         }
+        out.println("Последовательность возврастающая");
     }
 
-    public static void lesson7() {  //xz
+    public static void lesson7() {
         int[] fib = new int[20];
-        int count = 0;
-        for (int i = 1; i <= fib.length; i++) {
-            count = i + i;
-            fib[i] = count;
-            out.println(fib[i]);
+        fib[0] = 0;
+        fib[1] = 1;
+        for (int i = 1; i < fib.length - 1; i++) {
+            fib[i+1] = fib[i] + fib[i-1];
         }
+        Arrays.stream(fib).forEach(x -> out.print(x + " "));
     }
 
     public static void lesson8() {
@@ -177,7 +164,7 @@ public class Mainz {
             out.println(arr[i]);
         }
         out.println(" ");
-        for (int x = 0; x < arr.length; x++) { //не получилось сделать циклом  for each
+        for (int x = 0; x < arr.length; x++) {
             if (arr[x] > count) {
                 count = arr[x];
                 index = x;
@@ -193,56 +180,106 @@ public class Mainz {
 
         for (int i = 0; i < arr1.length; i++) {
             arr1[i] = (int) ((Math.random() * 9) + 1);
-            out.println(arr1[i]);
+            out.print(arr1[i] + " ");
         }
         out.println(" ");
         for (int i = 0; i < arr2.length; i++) {
             arr2[i] = (int) ((Math.random() * 9) + 1);
-            out.println(arr2[i]);
+            out.print(arr2[i] + " ");
         }
         out.println(" ");
         for (int i = 0; i < arr3.length; i++) {
-            arr3[i] = arr1[i] / arr2[i];
-            out.println(arr3[i]);
+            arr3[i] = (double) arr1[i] / (double) arr2[i];
+            out.print(arr3[i] + " ");
         }
         out.println(" ");
         int count = 0;
         for (double i : arr3) {
-            if (i % i != 0) {
+            if (i - Math.rint(i) == 0) {
                 count++;
             }
         }
-        out.println(count); // считает , но наоборот - нецелые числа
+        out.println(count);
     }
 
-    public static void lesson10() { // не понял как сделать
-        double[] arr = new double[11];
+    public static void lesson10() {
+        int[] arr = new int[11];
+        //int[] arrUnic = new int[0];
+        int first = 0;
+        int second = 0;
+        int third = 0;
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = (Math.random() * (1 + 1) - 1);
-            String s = " ";
-            s += arr[i] + " ";
-            out.println(s);//вообще затупил как в строку вывести
+            arr[i] = (int) (Math.random() * (3 + 1) - 2);
+            out.print(arr[i] + " ");
         }
-    }
-
-    public static void lesson11() {
-        int leftModulSum;
-        int rigtModulSum;
-        Scanner sc = new Scanner(System.in);
-        int userNum = sc.nextInt();
-        if (userNum < 2 | userNum % 2 != 0) {
-            out.println("Введите корректное число");;
-        } else {
-            int[] arr = new int[userNum];
-            for (int i = 0; i < arr.length; i++) {
-                arr[i] = (int) ((Math.random() * (10 + 1)) - 5);
-                out.println(arr[i]);
+        out.println(" ");
+        for (int x : arr) {
+            if (x < 0) {
+                first++;
             }
-            leftModulSum = arr.length / 2; //не понял как посчитать половину массива
+            if (x == 0) {
+                second++;
+            }
+            if (x > 0) {
+                third++;
+            }
         }
+        if (first > second && first > third) {
+            out.println(-1);
+        } else if (second > first && second > third) {
+            out.println(0);
+        } else if (third > first && third > second) {
+            out.println(1);
+        }
+
+
     }
 
-    public static void lesson12(){
+    //нужен массив с уникальными значениями (с числами в  ед. экземляре) или просто с переменными(3 перем. для каждого виды значений)
+    public static void lesson11() {
+        int leftModulSum = 0;
+        int rigtModulSum = 0;
+        String s = "";
+
+
+        int[] arr = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) ((Math.random() * (10 + 1)) - 5);
+            //int arrToMod = Math.abs(arr[i]);
+            s += arr[i] + " ";
+            //out.print(arrToMod);
+            out.print(" ");
+        }
+        out.println(" ");
+        out.println(s);
+
+        for (int a = 0;a < arr.length; a++){
+            if (a <= arr.length/2){
+                leftModulSum+= Math.abs(arr[a]);
+            }else {
+                rigtModulSum+= Math.abs(arr[a]);
+            }
+
+        }
+        /*for (int a = 0; a < arr.length / 2; a++) {
+            leftModulSum += Math.abs(arr[a]);
+        }
+        for (int i = arr.length - 1; i >= arr.length / 2; i--) {
+            rigtModulSum += Math.abs(arr[i]);
+        }*/
+
+        if (rigtModulSum > leftModulSum) {
+            out.println("Rigt: " + rigtModulSum);
+        } else {
+            out.println("Left: " + leftModulSum);
+        }
+
+    }
+}
+
+
+
+    /*public static void lesson12(){
     int[] arr = new int[12];
     for (int i = 0; i<arr.length;i++){
         arr[i]= (int) (Math.random() *(20+1)-10);
@@ -251,8 +288,9 @@ public class Mainz {
         }
         out.println(arr[i]);
     }
-    }
-}
+    }*/
+
+
 
 
 
