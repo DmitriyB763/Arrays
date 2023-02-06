@@ -1,14 +1,16 @@
 package org.example;
 
 
+import org.example.elements.Button;
+
 import java.util.Arrays;
-import java.util.Scanner;
 
 import static java.lang.System.out;
 //http://javazadachi.blogspot.com/p/blog-page_5.html
-public class Mainz {
-    public static void main(String[] args) {
+public class Main {
 
+    public static void main(String[] args) {
+        Button but = new Button();
         lesson7();
     }
 
